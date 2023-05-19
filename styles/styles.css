@@ -1,0 +1,43 @@
+body {
+  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
+    'Arial', sans-serif;
+  background-color: black;
+  color:#75f802;
+  text-align: center;
+  padding: 20px 20px 60px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+a {
+  font-size: 3vh;
+  color: hotpink; 
+}
+
+a:hover {
+  cursor: pointer;
+  filter: brightness(120%)
+}
+
+label {
+  color: aquamarine;
+  font-size: 4vh;
+}
+
+input {
+  background-color: black;
+  border: 2px solid aquamarine;
+  color: aquamarine;
+  padding: 8px 16px;
+  margin: 3px;
+}
+
+select {
+  background-color: black;
+  color: aquamarine;
+  border: 2px solid aquamarine;
+  padding: 8px 16px;
+  margin: 3px;
+}
+
+/* background-color: rgb(201, 184, 246); */

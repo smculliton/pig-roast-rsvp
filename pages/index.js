@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Home() {
+function Page() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -33,8 +33,12 @@ function Home() {
 
   return (
     <>
-      <br/>
-      First Name:
+      <h1>2nd ANNUAL CULLITON PIG ROAST RSVP</h1>
+      <h3>Congrats you've been invited to the roast!</h3>
+      <h2>General Info</h2>
+
+      <h2 style={{ color: 'aquamarine' }}>RSVP</h2>
+      <label>First Name: </label>
       <input  
         type="text"
         name="firstName"
@@ -43,7 +47,7 @@ function Home() {
       />
 
       <br/>
-      Last Name:
+      <label>Last Name: </label>
       <input  
         type="text"
         name="lastName"
@@ -52,7 +56,7 @@ function Home() {
       />
 
       <br/>
-      Side Dish:
+      <label>Side Dish: </label>
       <input  
         type="text"
         name="sideDish"
@@ -61,7 +65,7 @@ function Home() {
       />
 
       <br/>
-      # of People:
+      <label># of People: </label>
       <select  
         name="numberPeople"
         value={formData.numberPeople}
@@ -86,10 +90,10 @@ function Home() {
 
       <br/><br/>
       <a href="https://docs.google.com/spreadsheets/d/1K-ALlp-dqYRLd2VdG_nS4rEc6dmFWuMAuX_KUYStb3k/edit#gid=0">
-        Go To Spreadsheet
+        Manually Edit Spreadsheet Even Though Sean Obviously Put a Ton of Effort Into This Website. Or Maybe You Messed Up What Side You're Bringing. Or Maybe You Just Want to See Who All Is Coming. Sean Won't Take It Personally... Either Way, CLICK HERRE
       </a>
     </>
   )
 }
 
-export default Home
+export default Page
