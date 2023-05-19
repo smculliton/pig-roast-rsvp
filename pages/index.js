@@ -7,6 +7,8 @@ function Page() {
     sideDish: '',
     numberPeople: 1
   })
+
+  const [entered, setEntered] = useState(false)
   
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -18,17 +20,22 @@ function Page() {
   }
 
   const handleClick = async (e) => {
-    try {
-      const response = await fetch('/api/add-row',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-    } catch (error) {
-      console.log(error)
+    if (entered) {
+      console.log(entered)
+    } else {
+      try {
+        const response = await fetch('/api/add-row',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
+    setEntered(true)
   }
 
   return (
@@ -88,6 +95,7 @@ function Page() {
       >
         Enter
       </button>
+      {entered && <h2>Noice You've RSVP'd!!</h2>}
 
       <br/><br/>
       <a href="https://docs.google.com/spreadsheets/d/1K-ALlp-dqYRLd2VdG_nS4rEc6dmFWuMAuX_KUYStb3k/edit#gid=0">
