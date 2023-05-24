@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useSyncExternalStore } from 'react'
+import sideLimits from '@/data/side-limits'
 
 function Page() {
   const [formData, setFormData] = useState({
@@ -8,19 +9,23 @@ function Page() {
   })
 
   const [Rsvps, setRsvps] = useState([])
+  const [sides, setSides] = useState(sideLimits)
   const [loading, setLoading] = useState(false)
   const [entered, setEntered] = useState(false)
   const [invalidRsvp, setInvalidRsvp] = useState(false)
 
   useEffect(() => {
-    fetch('/api/get-names', {
+    fetch('/api/get-rsvps', {
       headers: {
         'Content-Type': 'application/json'
       },
     })
       .then(response => response.json())
       .then(data => {
-        setRsvps(data.names)
+        setRsvps(data.rsvps)
+        let sidesDecrement = sides 
+        data.rsvps.forEach(r => (sidesDecrement[r.side] -= 1))
+        setSides(sidesDecrement)
       })
   }, [])
 
@@ -40,8 +45,7 @@ function Page() {
   const handleClick = async (e) => {
     setLoading(true)
     setEntered(false)
-
-    console.log(alreadyRsvpd())
+    setInvalidRsvp(false)
 
     if (alreadyRsvpd()) {
       setInvalidRsvp(true)
@@ -57,16 +61,20 @@ function Page() {
       } catch (error) {
         console.log(error)
       }
+
       setEntered(true)
-      setInvalidRsvp(false)
-      setRsvps([...Rsvps, fullName()])
+      setRsvps([...Rsvps, { fullName: fullName(), side: formData.sideDish }])
+      setSides((prevSides) => ({
+        ...prevSides,
+        [formData.sideDish]: sides[formData.sideDish] - 1,
+      }))
     }
 
     setLoading(false)
   }
 
   const alreadyRsvpd = () => {
-    return Rsvps.includes(fullName()) ? true : false
+    return Rsvps.filter(rsvp => rsvp.fullName === fullName()).length > 0
   }
 
   return (
@@ -96,12 +104,21 @@ function Page() {
 
       <br/>
       <label>Side Dish: </label>
-      <input  
-        type="text"
+      <select 
         name="sideDish"
-        value={formData.sideDish}
         onChange={handleChange}
-      />
+        defaultValue={'placeholder'}
+      >
+        <option disabled={true} value='placeholder'>pick a side... any side</option>
+        {Object.keys(sides).map(side => (
+          <option 
+            value={side}
+            disabled={sides[side] === 0}
+          >
+            {`${side}: ${sides[side]} left`}
+          </option>
+        ))}
+      </select>
 
       <br/>
 

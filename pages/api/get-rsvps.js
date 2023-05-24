@@ -12,9 +12,12 @@ export default async function getNames (req, res) {
 
   try {
     const rows = await sheet.getRows()
-    const formatted = rows.map(row => `${row._rawData[0]} ${row._rawData[1]}`)
+    const formatted = rows.map(row => ({
+        fullName: `${row._rawData[0]} ${row._rawData[1]}`,
+        side: row._rawData[2]
+    }))
 
-    res.status(200).json({ names: formatted })
+    res.status(200).json({ rsvps: formatted })
   } catch (error) {
     console.log(error)
   }
