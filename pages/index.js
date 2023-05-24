@@ -74,7 +74,7 @@ function Page() {
       <h1>2nd ANNUAL CULLITON PIG ROAST RSVP</h1>
       <h3>Congrats you've been invited to the roast!</h3>
       <h2>General Info</h2>
-      <p>Location: --cabin addresss here--</p>
+      <p>Location: 210 Sugar Pine Ln, Fairplay, CO 80440</p>
       <p>Date: June freakin' 17th baby</p>
       <h2 style={{ color: 'aquamarine' }}>RSVP</h2>
       <label>First Name: </label>
