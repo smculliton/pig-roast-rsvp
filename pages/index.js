@@ -1,27 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useSyncExternalStore } from 'react'
 
 function Page() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     sideDish: '',
-    numberPeople: 1
   })
 
+  const [Rsvps, setRsvps] = useState([])
+  const [loading, setLoading] = useState(false)
   const [entered, setEntered] = useState(false)
+  const [invalidRsvp, setInvalidRsvp] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/get-names', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setRsvps(data.names)
+      })
+  }, [])
+
+  const fullName = () => {
+    return `${formData.firstName} ${formData.lastName}`
+  }
   
   const handleChange = (e) => {
     const { name, value } = e.target
 
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: name === 'numberPeople' ? Number(value) : value
-    }))
+      [name]: value
+    }))  
   }
 
   const handleClick = async (e) => {
-    if (entered) {
-      console.log(entered)
+    setLoading(true)
+    setEntered(false)
+
+    console.log(alreadyRsvpd())
+
+    if (alreadyRsvpd()) {
+      setInvalidRsvp(true)
     } else {
       try {
         const response = await fetch('/api/add-row',{
@@ -34,8 +57,16 @@ function Page() {
       } catch (error) {
         console.log(error)
       }
+      setEntered(true)
+      setInvalidRsvp(false)
+      setRsvps([...Rsvps, fullName()])
     }
-    setEntered(true)
+
+    setLoading(false)
+  }
+
+  const alreadyRsvpd = () => {
+    return Rsvps.includes(fullName()) ? true : false
   }
 
   return (
@@ -73,29 +104,17 @@ function Page() {
       />
 
       <br/>
-      <label># of People: </label>
-      <select  
-        name="numberPeople"
-        value={formData.numberPeople}
-        onChange={handleChange}
-      >
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-      </select>
-      <br/>
 
-      <button
-        onClick={handleClick}
-      >
-        Enter
-      </button>
-      {entered && <h2>Noice You've RSVP'd!!</h2>}
+      { loading ? 'Holdd uP... onE SeC' :
+        <button
+          onClick={handleClick}
+        >
+          Enter
+        </button>
+      }
+      
+      {invalidRsvp && <h2>You're allready in the SpreadshEet 😅</h2>}
+      {entered && <h2>Noice You've RSVP'd!! 🐗🔥🎉</h2>}
 
       <br/><br/>
       <a href="https://docs.google.com/spreadsheets/d/1K-ALlp-dqYRLd2VdG_nS4rEc6dmFWuMAuX_KUYStb3k/edit#gid=0">
