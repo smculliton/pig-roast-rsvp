@@ -4,7 +4,7 @@ const sideLimits = {
   'Potato Salad': 5,
   'Cole Slaw': 5,
   'BBQ Sauce': 5,
-  'Charcuterie': 0
+  'Charcuterie': 2
 }
 
 export default sideLimits
