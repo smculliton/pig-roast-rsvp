@@ -82,8 +82,13 @@ function Page() {
       <h1>2nd ANNUAL CULLITON PIG ROAST RSVP</h1>
       <h3>Congrats you've been invited to the roast!</h3>
       <h2>General Info</h2>
-      <p>Location: 210 Sugar Pine Ln, Fairplay, CO 80440</p>
-      <p>Date: June freakin' 17th baby</p>
+      <h3>Location: 158 Sugar Pine Ln, Fairplay, CO 80440</h3>
+      <h3>Date: June freakin' 17th baby</h3>
+      <h3>Notes:</h3>
+      <p>We're asking $20 pitch to cover the pig/roaster/keg.</p>
+      <p>You can camp on the property! please no driVing home dronk on pork</p>
+      <p>This will be a potluck event so please sign up for a side below as well! If you have other ideas you can manually enter them by clicking the large pink link below. We ask that you bring enough for 4-5 people to have a small side portion. Otherwise there will be a s***lOaD of food. THank you.</p>
+      <p>~❤️~ -the pig comittee</p>
       <h2 style={{ color: 'aquamarine' }}>RSVP</h2>
       <label>First Name: </label>
       <input  
