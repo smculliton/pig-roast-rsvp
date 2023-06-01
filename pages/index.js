@@ -84,6 +84,7 @@ function Page() {
       <h2>General Info</h2>
       <h3>Location: 158 Sugar Pine Ln, Fairplay, CO 80440</h3>
       <h3>Date: June freakin' 17th baby</h3>
+      <h3>Time: Literalllyy all day long. Come up whenEVS and stay the night.</h3>
       <h3>Notes:</h3>
       <p>We're asking $20 pitch to cover the pig/roaster/keg.</p>
       <p>You can camp on the property! please no driVing home dronk on pork</p>
